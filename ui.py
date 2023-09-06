@@ -1,5 +1,9 @@
 import tkinter as tk
 from tkinter import filedialog
+from tkinter import font
+
+import matplotlib.pyplot as plt
+
 
 import pydicom
 import numpy as np
@@ -67,6 +71,7 @@ def hsv():
         img = cv2.imread('output.png')
         img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
         cv2.imshow("HSV",img)
+        plt.imshow(img, cmap ='hot') 
         
 
 # Function to perform some action when Button 2 is clicked
@@ -80,41 +85,69 @@ def erode_dilate():
     cv2.imshow("Dilate Demo",image2)
     result_label.config(text="Function 2 executed")
 
+
+def harris_corner():
+    img2 = cv2.imread('output.png')
+    img = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
+    # modify the data type
+    # setting to 32-bit floating point
+    operatedImage = np.float32(img)
+    
+    # apply the cv2.cornerHarris method
+    # to detect the corners with appropriate
+    # values as input parameters
+    dest = cv2.cornerHarris(operatedImage, 2, 5, 0.07)
+    
+    # Results are marked through the dilated corners
+    dest = cv2.dilate(dest, None)
+    
+    # Reverting back to the original image,
+    # with optimal threshold value
+    img[dest > 0.01 * dest.max()]=[240]
+    
+    # Showing the final image.
+    cv2.imshow("Original Image", img2)
+    cv2.imshow('Harris corner', img) 
+    
+
+
 # Create the main window
 root = tk.Tk()
 root.title("DICOM Image Processing Examples")
 
 # Create a heading label
 heading_label = tk.Label(root, text="Interesting Image Processing", font=("Helvetica", 16))
-heading_label.pack()
+heading_label.pack(pady=5)
 
 # Create a label for the selected file
 file_label = tk.Label(root, text="Selected File: None")
-file_label.pack()
+file_label.pack(pady=5)
 
 # Create a button to open a file dialog
 open_file_button = tk.Button(root, text="Open File", command=open_file_dialog)
-open_file_button.pack()
+open_file_button.pack(pady=5)
 
 # Create a heading for custom functions
 functions_heading = tk.Label(root, text="Custom Functions", font=("Helvetica", 12))
-functions_heading.pack()
+functions_heading.pack(pady=5)
 
 # Create Buttons for custom functions
 button_1 = tk.Button(root, text="Threshold", command=threshold)
-button_1.pack()
+button_1.pack(pady=5)
 
 button_2 = tk.Button(root, text="Erode/Dilate", command=erode_dilate)
-button_2.pack()
+button_2.pack(pady=5)
 
 
 button_3 = tk.Button(root, text="HSV", command=hsv)
-button_3.pack()
+button_3.pack(pady=5)
 
+button_4 = tk.Button(root, text="Corner Detection", command=harris_corner)
+button_4.pack(pady=5)
 
 # Create a label to display function results
 result_label = tk.Label(root, text="")
-result_label.pack()
+result_label.pack(pady=5)
 
 # Start the GUI main loop
 root.mainloop()
