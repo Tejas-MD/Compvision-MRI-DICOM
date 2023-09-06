@@ -1,4 +1,4 @@
-# compvision-voxelgrid
+# Compvision-MRI_DICOM
 
 ![image](https://github.com/Tejas-MD/compvision-voxelgrid/assets/66009946/00f337c2-c39b-44a2-9748-4d7c6cb26a41)
 Main UI
