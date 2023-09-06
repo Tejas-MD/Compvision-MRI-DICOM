@@ -1,4 +1,5 @@
 # Compvision-MRI_DICOM
+### This project converts DICOM files to 8 bit images and performs some basic processing on it. 
 
 ![image](https://github.com/Tejas-MD/compvision-voxelgrid/assets/66009946/00f337c2-c39b-44a2-9748-4d7c6cb26a41)
 Main UI
