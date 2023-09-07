@@ -43,7 +43,7 @@ To run this application on your local machine, follow these steps:
 
 ```
 git clone https://github.com/Tejas-MD/Compvision-MRI-DICOM.git
-
+```
 
 2. Install the required Python packages using pip:
 
